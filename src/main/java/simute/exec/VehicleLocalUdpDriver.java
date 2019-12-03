@@ -1,6 +1,7 @@
 package simute.exec;
 
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import simute.Env;
 import simute.ImageRenderer;
@@ -28,7 +29,7 @@ public class VehicleLocalUdpDriver implements I_Driver {
 	private final UdpReceiveCommand getCommand;
 	private final UdpSendImage sendImage;
 	
-	public VehicleLocalUdpDriver() {
+	public VehicleLocalUdpDriver() throws IOException {
 		getCommand = new UdpReceiveCommand(LOCAL_PORT);
 		sendImage = new UdpSendImage(REMOTE_HOST, REMOTE_PORT);
 		getCommand.start();

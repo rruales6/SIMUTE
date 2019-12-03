@@ -20,7 +20,7 @@ public class UdpReceiveCommand extends Thread {
     public UdpReceiveCommand(int puerto) throws IOException {
         this.puerto = puerto;
         commandQueue = new LinkedBlockingQueue<>();
-        this.socket= new DatagramSocket(8888);
+        this.socket= new DatagramSocket(puerto);
         this.buffer= new byte [32];
         this.packet=new DatagramPacket(buffer, buffer.length);
     }
@@ -28,7 +28,8 @@ public class UdpReceiveCommand extends Thread {
     @Override
     public void run()   {
         //Capture las instrucciones enviadas por el conductor remoto y póngalas en la cola (addInstruccion(...))
-    	try {
+    	try 
+    	{
 			socket.receive(packet);
 			String instruccion = new String(packet.getData(), 0, packet.getLength());
 			System.out.println(

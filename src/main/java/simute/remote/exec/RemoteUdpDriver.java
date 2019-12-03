@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,11 +24,11 @@ public class RemoteUdpDriver {
     private static final int SERVER_PORT = 8888;
     private static final int LOCAL_PORT = 8889;    
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
     	new RemoteUdpDriver();
     }
     
-    public RemoteUdpDriver() {
+    public RemoteUdpDriver() throws IOException{
         JFrame frame = new JFrame("Conduciendo el BotUTE");
         frame.add(new PanelCamara(), BorderLayout.WEST);
         frame.add(new PanelControles(), BorderLayout.CENTER);
@@ -41,7 +43,7 @@ public class RemoteUdpDriver {
 		private static final long serialVersionUID = 1L;
 		private final JLabel monitor;
 
-        public PanelCamara() {
+        public PanelCamara() throws IOException {
             monitor = new JLabel(new ImageIcon("noimg_400_X_300.png"));
             add(monitor);
             new UdpReceiveImage(monitor, LOCAL_PORT).start();
@@ -55,7 +57,7 @@ public class RemoteUdpDriver {
 		private static final long serialVersionUID = 1L;
 		private final UdpSendCommand enviaInstruccion;
         
-        public PanelControles() {
+        public PanelControles() throws IOException{
             setLayout(new BorderLayout());
             JButton bW = new JButton("W");
             bW.addKeyListener(keyL);
